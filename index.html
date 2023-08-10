@@ -9,14 +9,13 @@
     <textarea id="inputNumbers" rows="4" cols="50"></textarea>
     <br>
     <button onclick="findCombinations()">Find Combinations</button>
-    <h2>Valid Combinations:</h2>
+    <h2>Valid Combinations (Sum between 150 and 220):</h2>
     <ul id="result"></ul>
 
     <script>
         function findCombinations() {
             var inputText = document.getElementById("inputNumbers").value;
             var numbers = inputText.split(",").map(Number);
-            var targetRange = Array.from({ length: 71 }, (_, i) => i + 150);
 
             var validCombinations = [];
 
@@ -24,7 +23,7 @@
                 var combinations = getCombinations(numbers, r);
                 for (var i = 0; i < combinations.length; i++) {
                     var sum = combinations[i].reduce((acc, val) => acc + val, 0);
-                    if (targetRange.includes(sum)) {
+                    if (sum >= 150 && sum <= 220) {
                         validCombinations.push(combinations[i]);
                     }
                 }
