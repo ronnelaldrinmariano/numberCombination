@@ -9,7 +9,7 @@
     <textarea id="inputNumbers" rows="4" cols="50"></textarea>
     <br>
     <button onclick="findCombinations()">Find Combinations</button>
-    <h2>Valid Combinations (Sum between 150 and 220):</h2>
+    <h2>Valid Combinations (Sum between 150 and 220 seconds):</h2>
     <ul id="result"></ul>
 
     <script>
@@ -23,7 +23,7 @@
                 var combinations = getCombinations(numbers, r);
                 for (var i = 0; i < combinations.length; i++) {
                     var sum = combinations[i].reduce((acc, val) => acc + val, 0);
-                    if (sum >= 142 && sum <= 220) {
+                    if (sum >= 145 && sum <= 220) {
                         validCombinations.push(combinations[i]);
                     }
                 }
