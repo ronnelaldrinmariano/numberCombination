@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thanks me Later : Ronnel Mariano</title>
+</head>
+<body>
+    <h1>Number Combinations</h1>
+    <p>Enter a list of numbers separated by commas:</p>
+    <textarea id="inputNumbers" rows="4" cols="50"></textarea>
+    <br>
+    <button onclick="findCombinations()">Find Combinations</button>
+    <h2>Valid Combinations:</h2>
+    <ul id="result"></ul>
+
+    <script>
+        function findCombinations() {
+            var inputText = document.getElementById("inputNumbers").value;
+            var numbers = inputText.split(",").map(Number);
+            var targetRange = Array.from({ length: 2852 }, (_, i) => i + 148);
+
+            var validCombinations = [];
+
+            for (var r = 1; r <= numbers.length; r++) {
+                var combinations = getCombinations(numbers, r);
+                for (var i = 0; i < combinations.length; i++) {
+                    var sum = combinations[i].reduce((acc, val) => acc + val, 0);
+                    if (targetRange.includes(sum)) {
+                        validCombinations.push(combinations[i]);
+                    }
+                }
+            }
+
+            var result = document.getElementById("result");
+            result.innerHTML = "";
+
+            validCombinations.forEach(function (combo) {
+                var listItem = document.createElement("li");
+                listItem.textContent = combo.join(", ");
+                result.appendChild(listItem);
+            });
+        }
+
+        function getCombinations(arr, r) {
+            var result = [];
+            var f = function (prefix, arr, r) {
+                if (r === 0) {
+                    result.push(prefix);
+                } else {
+                    for (var i = 0; i < arr.length; i++) {
+                        f(prefix.concat(arr[i]), arr.slice(i + 1), r - 1);
+                    }
+                }
+            }
+            f([], arr, r);
+            return result;
+        }
+    </script>
+</body>
+</html>
