@@ -16,29 +16,29 @@
         function findCombinations() {
             var inputText = document.getElementById("inputNumbers").value;
             var numbers = inputText.split(",").map(Number);
-
+    
             var validCombinations = [];
-
+    
             for (var r = 1; r <= numbers.length; r++) {
                 var combinations = getCombinations(numbers, r);
                 for (var i = 0; i < combinations.length; i++) {
                     var sum = combinations[i].reduce((acc, val) => acc + val, 0);
-                    if (sum >= 160 && sum <= 180) {
-                        validCombinations.push(combinations[i]);
+                    if (sum >= 150 && sum <= 180) {
+                        validCombinations.push({ combination: combinations[i], sum: sum });
                     }
                 }
             }
-
+    
             var result = document.getElementById("result");
             result.innerHTML = "";
-
+    
             validCombinations.forEach(function (combo) {
                 var listItem = document.createElement("li");
-                listItem.textContent = combo.join(", ");
+                listItem.textContent = combo.combination.join(", ") + " (Sum: " + combo.sum + ") Seconds";
                 result.appendChild(listItem);
             });
         }
-
+    
         function getCombinations(arr, r) {
             var result = [];
             var f = function (prefix, arr, r) {
@@ -54,5 +54,6 @@
             return result;
         }
     </script>
+    
 </body>
 </html>
